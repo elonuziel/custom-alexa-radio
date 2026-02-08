@@ -23,18 +23,18 @@ logger.setLevel(logging.INFO)
 # ============================================================================
 
 STATIONS = {
-    1: "https://28993.live.streamtheworld.com/KAN_KOL_HAMUSICA.mp3",
-    2: "https://kan-88.streamgates.net/stream/kan-88",
-    3: "https://glglz.LiveBroadcast.Radio/galgalatz",
+    1: "http://tunein.streamguys1.com/CNNi",
+    2: "https://stream.live.vc.bbcmedia.co.uk/bbc_world_service_americas",
+    3: "https://ice-sov.musicradio.com/ClassicFMMP3",
     4: "https://radioplaceholder1.example.com/stream",  # Placeholder
     5: "https://radioplaceholder2.example.com/stream"   # Placeholder
 }
 
 # Station names for better user experience (optional)
 STATION_NAMES = {
-    1: "Kan Kol HaMusica",
-    2: "Kan 88",
-    3: "Galgalatz",
+    1: "CNN",
+    2: "BBC",
+    3: "classical music",
     4: "Station 4",
     5: "Station 5"
 }
