@@ -191,7 +191,8 @@ STATIONS = {
     50: "url50"
 }
 ```
-
+- also check out  [The Radio Stream Directory](http://nossl.fmstream.org/index.php)
+  
 ### Custom Welcome Message
 
 Edit the `LaunchRequestHandler`:
@@ -214,7 +215,6 @@ STATION_NAMES = {
     3: "News and Talk"
 }
 ```
-check out  .[The Radio Stream Directory](http://nossl.fmstream.org/index.php)
 
 ## Requirements
 
