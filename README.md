@@ -83,19 +83,19 @@ STATION_NAMES = {
 User: "Alexa, open my radio"
 Alexa: "Welcome to My Radio. I have 5 stations available. Choose a station number to start listening."
 User: "Station 1"
-Alexa: "Playing station 1, Kan Kol HaMusica." [music starts]
+Alexa: "Playing station 1, cnn." [music starts]
 ```
 
 ### Switch Stations
 ```
 User: "Alexa, next"
-Alexa: "Playing station 2, Kan 88." [switches to next station]
+Alexa: "Playing station 2, bbc." [switches to next station]
 
 User: "Alexa, previous"
-Alexa: "Playing station 1, Kan Kol HaMusica." [switches to previous station]
+Alexa: "Playing station 1, cnn." [switches to previous station]
 
 User: "Alexa, play station 3"
-Alexa: "Playing station 3, Galgalatz." [switches to station 3]
+Alexa: "Playing station 3, classical music." [switches to station 3]
 ```
 
 ### Playback Control
@@ -104,7 +104,7 @@ User: "Alexa, pause"
 [Music stops]
 
 User: "Alexa, resume"
-Alexa: "Resuming station 3, Galgalatz." [resumes last station]
+Alexa: "Resuming station 3, classical music." [resumes last station]
 
 User: "Alexa, stop"
 Alexa: "Stopping playback. Goodbye!" [stops and exits]
