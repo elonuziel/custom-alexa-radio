@@ -50,10 +50,10 @@ STATION_NAMES = {
 5. Choose **Alexa-Hosted (Python)** as the hosting method
 6. Click **Create Skill**
 
-### 2. Upload the Lambda Function
+### 2. Upload the Lambda Function and Requirements
 
 1. In the Alexa Developer Console, go to the **Code** tab
-2. Replace the contents of `lambda_function.py` with the provided code
+2. Replace the contents of `lambda_function.py` and `requirements.txt` with the provided code
 3. Click **Save** then **Deploy**
 
 ### 3. Configure the Interaction Model
