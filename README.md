@@ -15,9 +15,9 @@ A robust Alexa skill for streaming multiple radio stations with full playback co
 
 The skill comes pre-configured with these stations:
 
-1. **Kan Kol HaMusica** - `https://28993.live.streamtheworld.com/KAN_KOL_HAMUSICA.mp3`
-2. **Kan 88** - `https://kan-88.streamgates.net/stream/kan-88`
-3. **Galgalatz** - `https://glglz.LiveBroadcast.Radio/galgalatz`
+1. **CNN** - `http://tunein.streamguys1.com/CNNi`
+2. **BBC** - `https://stream.live.vc.bbcmedia.co.uk/bbc_world_service_americas`
+3. **classical music** - `https://ice-sov.musicradio.com/ClassicFMMP3`
 4. **Station 4** - Placeholder URL
 5. **Station 5** - Placeholder URL
 
