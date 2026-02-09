@@ -191,7 +191,7 @@ STATIONS = {
     50: "url50"
 }
 ```
-- also check out  [The Radio Stream Directory](http://nossl.fmstream.org/index.php)
+- also check out  [The Radio Stream Directory](http://nossl.fmstream.org/index.php) and [Radio stream URL search engine](https://streamurl.link/)
   
 ### Custom Welcome Message
 
