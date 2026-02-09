@@ -44,7 +44,17 @@ STATION_NAMES = {
 # ============================================================================
 
 def get_current_station(handler_input):
-    """Get the current station number from session or persistent attributes."""
+    """Get the current station number from AudioPlayer token, session, or default to 1."""
+    # First, check the AudioPlayer context for the currently playing token
+    try:
+        audio_player = handler_input.request_envelope.context.audio_player
+        if audio_player and audio_player.token:
+            return int(audio_player.token)
+    except (AttributeError, ValueError, TypeError):
+        # If AudioPlayer context doesn't exist or token is invalid, continue to fallback
+        pass
+    
+    # Fallback to session attributes
     session_attr = handler_input.attributes_manager.session_attributes
     return session_attr.get('current_station', 1)
 
@@ -190,7 +200,7 @@ class PlayStationIntentHandler(AbstractRequestHandler):
         set_current_station(handler_input, station_number)
         play_directive = create_play_directive(station_number)
         
-        speak_output = f"Playing station {station_number}, {get_station_name(station_number)}."
+        speak_output = f"Playing {get_station_name(station_number)}."
         
         return (
             handler_input.response_builder
@@ -216,7 +226,7 @@ class NextIntentHandler(AbstractRequestHandler):
         set_current_station(handler_input, next_station)
         play_directive = create_play_directive(next_station)
         
-        speak_output = f"Playing station {next_station}, {get_station_name(next_station)}."
+        speak_output = f"Playing {get_station_name(next_station)}."
         
         return (
             handler_input.response_builder
@@ -242,7 +252,7 @@ class PreviousIntentHandler(AbstractRequestHandler):
         set_current_station(handler_input, previous_station)
         play_directive = create_play_directive(previous_station)
         
-        speak_output = f"Playing station {previous_station}, {get_station_name(previous_station)}."
+        speak_output = f"Playing {get_station_name(previous_station)}."
         
         return (
             handler_input.response_builder
@@ -303,7 +313,7 @@ class ResumeIntentHandler(AbstractRequestHandler):
         current_station = get_current_station(handler_input)
         play_directive = create_play_directive(current_station)
         
-        speak_output = f"Resuming station {current_station}, {get_station_name(current_station)}."
+        speak_output = f"Resuming {get_station_name(current_station)}."
         
         return (
             handler_input.response_builder
