@@ -1,0 +1,56 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "my radio",
+      "intents": [
+        {
+          "name": "PlayStationIntent",
+          "slots": [
+            {
+              "name": "stationNumber",
+              "type": "AMAZON.NUMBER"
+            }
+          ],
+          "samples": [
+            "play station {stationNumber}",
+            "station {stationNumber}",
+            "play {stationNumber}",
+            "choose station {stationNumber}",
+            "tune to station {stationNumber}",
+            "switch to station {stationNumber}",
+            "{stationNumber}"
+          ]
+        },
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.PauseIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.ResumeIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.NextIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.PreviousIntent",
+          "samples": []
+        }
+      ],
+      "types": []
+    }
+  }
+}
