@@ -10,7 +10,7 @@ const Alexa = require('ask-sdk-core');
 // ============================================================================
 
 const STATIONS = {
-    1: 'http://tunein.streamguys1.com/CNNi',
+    1: 'https://tunein.streamguys1.com/CNNi',
     2: 'https://stream.live.vc.bbcmedia.co.uk/bbc_world_service_americas',
     3: 'https://ice-sov.musicradio.com/ClassicFMMP3',
     4: 'https://radioplaceholder1.example.com/stream',  // Placeholder
@@ -312,6 +312,84 @@ const SessionEndedRequestHandler = {
     }
 };
 
+const FallbackIntentHandler = {
+    canHandle(handlerInput) {
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.FallbackIntent';
+    },
+    handle(handlerInput) {
+        console.log('AMAZON.FallbackIntent received');
+
+        const speakOutput = `I didn't catch that. You can say a station number from 1 to ${STATION_COUNT}, or say next, previous, pause, or resume.`;
+
+        return handlerInput.responseBuilder
+            .speak(speakOutput)
+            .reprompt(speakOutput)
+            .getResponse();
+    }
+};
+
+// ============================================================================
+// AUDIOPLAYER & PLAYBACKCONTROLLER HANDLERS
+// ============================================================================
+
+const AudioPlayerEventHandler = {
+    canHandle(handlerInput) {
+        return handlerInput.requestEnvelope.request.type.startsWith('AudioPlayer.');
+    },
+    handle(handlerInput) {
+        const eventName = handlerInput.requestEnvelope.request.type;
+        console.log(`AudioPlayer event: ${eventName}`);
+
+        // On PlaybackFailed, log the error details
+        if (eventName === 'AudioPlayer.PlaybackFailed') {
+            const error = handlerInput.requestEnvelope.request.error;
+            console.error(`Playback failed: ${JSON.stringify(error)}`);
+        }
+
+        return handlerInput.responseBuilder.getResponse();
+    }
+};
+
+const PlaybackControllerHandler = {
+    canHandle(handlerInput) {
+        return handlerInput.requestEnvelope.request.type.startsWith('PlaybackController.');
+    },
+    handle(handlerInput) {
+        const eventName = handlerInput.requestEnvelope.request.type;
+        console.log(`PlaybackController event: ${eventName}`);
+
+        // Pause — stop playback (no speech allowed in PlaybackController responses)
+        if (eventName === 'PlaybackController.PauseCommandIssued') {
+            return handlerInput.responseBuilder
+                .addDirective({ type: 'AudioPlayer.Stop' })
+                .withShouldEndSession(true)
+                .getResponse();
+        }
+
+        // Play / Next / Previous — determine which station to play
+        const currentStation = getCurrentStation(handlerInput);
+        let stationToPlay = currentStation;
+
+        if (eventName === 'PlaybackController.NextCommandIssued') {
+            stationToPlay = getNextStation(currentStation);
+        } else if (eventName === 'PlaybackController.PreviousCommandIssued') {
+            stationToPlay = getPreviousStation(currentStation);
+        }
+
+        const playDirective = createPlayDirective(stationToPlay);
+
+        return handlerInput.responseBuilder
+            .addDirective(playDirective)
+            .withShouldEndSession(true)
+            .getResponse();
+    }
+};
+
+// ============================================================================
+// FALLBACK HANDLER
+// ============================================================================
+
 const IntentReflectorHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest';
@@ -364,7 +442,10 @@ exports.handler = Alexa.SkillBuilders.custom()
         ResumeIntentHandler,
         CancelIntentHandler,
         HelpIntentHandler,
+        FallbackIntentHandler,
         SessionEndedRequestHandler,
+        AudioPlayerEventHandler,
+        PlaybackControllerHandler,
         IntentReflectorHandler   // Must be last
     )
     .addErrorHandlers(ErrorHandler)

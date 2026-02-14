@@ -48,6 +48,10 @@
         {
           "name": "AMAZON.PreviousIntent",
           "samples": []
+        },
+        {
+          "name": "AMAZON.FallbackIntent",
+          "samples": []
         }
       ],
       "types": []
